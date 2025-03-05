@@ -25,12 +25,6 @@ public class CraftingManager : MonoBehaviour
         {
             AcessCraftingTable();
         }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Recipes.Add(new Recipe(2, new Dictionary<int, int> { { 2, 4 }, { 0, 1 } }, 1, 20));
-            CraftingUIManager.UpdateCraftingUI(Recipes);
-        }
     }
 
     public void Craft(int RecipeID)
