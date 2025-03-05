@@ -79,7 +79,14 @@ public class InventarUI : MonoBehaviour
 
                 Image[] img = InstantiatedObject.GetComponentsInChildren<Image>();
 
-                img[1].sprite = InventarManager.InitialisedItems[Stack.ID].Sprite;
+                if (InventarManager.InitialisedItems[Stack.ID].Sprite != null)
+                {
+                    img[1].sprite = InventarManager.InitialisedItems[Stack.ID].Sprite;
+                }
+                else
+                {
+                    img[1].color = Color.clear;
+                }
 
                 TMP_Text TextKomponente = InstantiatedObject.GetComponentInChildren<TMP_Text>();
                 Outline outline = InstantiatedObject.GetComponent<Outline>();

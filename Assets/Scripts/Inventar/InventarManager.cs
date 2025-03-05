@@ -35,6 +35,8 @@ public class InventarManager : MonoBehaviour
     [Header("Sprites")]
     public Sprite PotionSprite;
     public Sprite GlassSprite;
+    public Sprite ScrapSprite;
+    public Sprite Geschwindigkeitsessenzspprite;
 
     [Header("Item GameObjects")]
     public GameObject SpeedPotionModell;
@@ -65,11 +67,8 @@ public class InventarManager : MonoBehaviour
 
         /* 0: SpeedPotion */ InitialisedItems.Add(new Potion("Speed Potion", SpeedPotionModell, PotionSprite, 16, 0, BuffManager, 60, 1));
         /* 1: Glas */ InitialisedItems.Add(new Item("Glas", null, GlassSprite, 64));
-        /* 2: Geschwindigkeitsseelen */ InitialisedItems.Add(new Item("Geschwindigkeitsseelen", null, null, 4));
-
-        AddItem(1, 64, Inventare[0]);
-        AddItem(2, 16, Inventare[0]);
-        AddItem(0, 20, Inventare[0]);
+        /* 2: Geschwindigkeitsseelen */ InitialisedItems.Add(new Item("Geschwindigkeitsessenz", null, Geschwindigkeitsessenzspprite, 64));
+        /* 3: Scrap */ InitialisedItems.Add(new Item("Scrap", null, ScrapSprite, 64));
 
         InventarUI.UpdateInventory(Inventare[0]);
         InventarUI.UpdateInventory(Inventare[1]);

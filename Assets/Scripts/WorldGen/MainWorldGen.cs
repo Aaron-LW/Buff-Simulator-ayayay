@@ -215,8 +215,8 @@ public class MainWorldGen : MonoBehaviour
 
         for (int i = 0;  i < AmountItems; i++)
         {
-            int ID = Mathf.RoundToInt(Random.Range(1, 3));
-            int Amount = Mathf.RoundToInt(Random.Range(1, 5));
+            int ID = Mathf.RoundToInt(Random.Range(1, 4));
+            int Amount = Mathf.RoundToInt(Random.Range(1, 30));
 
             Debug.Log(ID);
 
