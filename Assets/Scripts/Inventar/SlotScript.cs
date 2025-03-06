@@ -2,12 +2,17 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class SlotScript : MonoBehaviour, IPointerClickHandler
+public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public int SlotIndex = 999;
     public int InventarIndex = 999;
     public bool Exisitert = false;
+
+    Outline outline;
+
+    public bool MouseOver = false;
 
     public InventarManager InventarManagerScript;
 
@@ -15,6 +20,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
     {
         GameObject InventarManager = GameObject.Find("InventarManager");
         InventarManagerScript = InventarManager.GetComponent<InventarManager>();
+
+        outline = GetComponent<Outline>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -49,5 +56,17 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        outline.enabled = true;
+        MouseOver = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        outline.enabled = false;
+        MouseOver = false;
     }
 }

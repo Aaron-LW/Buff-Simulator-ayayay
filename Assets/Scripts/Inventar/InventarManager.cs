@@ -19,8 +19,7 @@ public class InventarManager : MonoBehaviour
 
     private ChestScript ChestScript;
     private CraftingManager CraftingManager;
-    private RaycastHit CurrentOpenChestRayCastHit;
-    private RaycastHit CurrentOpenCraftingTableRayCastHit;
+    private RaycastHit CurrentOpenInteractableRayCastHit;
 
     [Header("InventarGameObjects")]
     public GameObject MainInventarBasePos;
@@ -47,6 +46,7 @@ public class InventarManager : MonoBehaviour
     public GameObject PlayerObjekt;
     public GameObject CameraObject;
     public BuffManager BuffManager;
+    public LayerMask Interactables;
 
     [HideInInspector] public bool DraggingObject = false;
     [HideInInspector] public int DraggedObjectID = 999;
@@ -57,6 +57,8 @@ public class InventarManager : MonoBehaviour
     [HideInInspector] public int OpenChestIndex = 9999;
 
     [HideInInspector] public bool CraftingTableOpen = false;
+    [HideInInspector] private RaycastHit CurrentSelectedInteractable;
+    [HideInInspector] private QuickOutline CurrentSelectedInteractableOutline = null;
 
     private void Awake()
     {
@@ -70,6 +72,9 @@ public class InventarManager : MonoBehaviour
         /* 2: Geschwindigkeitsseelen */ InitialisedItems.Add(new Item("Geschwindigkeitsessenz", null, Geschwindigkeitsessenzspprite, 64));
         /* 3: Scrap */ InitialisedItems.Add(new Item("Scrap", null, ScrapSprite, 64));
 
+        AddItem(1, 64, Inventare[0]);
+        AddItem(2, 64, Inventare[0]);
+
         InventarUI.UpdateInventory(Inventare[0]);
         InventarUI.UpdateInventory(Inventare[1]);
     }
@@ -82,6 +87,23 @@ public class InventarManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Interaction();
+        }
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out CurrentSelectedInteractable, InteractionDistance, Interactables))
+        {
+            if (CurrentSelectedInteractableOutline == null)
+            {
+                CurrentSelectedInteractableOutline = CurrentSelectedInteractable.collider.gameObject.GetComponent<QuickOutline>();
+                CurrentSelectedInteractableOutline.enabled = true;
+            }
+        }
+        else
+        {
+            if (CurrentSelectedInteractableOutline != null)
+            {
+                CurrentSelectedInteractableOutline.enabled = false;
+                CurrentSelectedInteractableOutline = null;
+            }
         }
     }
 
@@ -201,7 +223,7 @@ public class InventarManager : MonoBehaviour
         if (ChestOpen)
         {
             ChestScript.CloseChest();
-            StopCoroutine(CheckDistanceToInteracted(CurrentOpenChestRayCastHit.transform, ChestScript));
+            StopCoroutine(CheckDistanceToInteracted(CurrentOpenInteractableRayCastHit.transform, ChestScript));
 
             return;
         }
@@ -214,31 +236,33 @@ public class InventarManager : MonoBehaviour
             return;
         }
 
-        if (Physics.Raycast(CameraObject.transform.position, CameraObject.transform.forward, out CurrentOpenChestRayCastHit, InteractionDistance, ChestMask))
+        if (Physics.Raycast(CameraObject.transform.position, CameraObject.transform.forward, out CurrentOpenInteractableRayCastHit, InteractionDistance, Interactables))
         {
-            ChestScript = CurrentOpenChestRayCastHit.collider.gameObject.GetComponent<ChestScript>();
-
-            if (ChestScript != null && !ChestOpen)
+            if (CurrentOpenInteractableRayCastHit.collider.tag.Equals("Chest"))
             {
-                ChestScript.OpenChest();
-                StartCoroutine(CheckDistanceToInteracted(CurrentOpenChestRayCastHit.transform, ChestScript));
+                ChestScript = CurrentOpenInteractableRayCastHit.collider.gameObject.GetComponent<ChestScript>();
+
+                if (ChestScript != null && !ChestOpen)
+                {
+                    ChestScript.OpenChest();
+                    StartCoroutine(CheckDistanceToInteracted(CurrentOpenInteractableRayCastHit.transform, ChestScript));
+                    return;
+                }
                 return;
             }
-            return;
-        }
-
-        if (Physics.Raycast(CameraObject.transform.position, CameraObject.transform.forward, out CurrentOpenCraftingTableRayCastHit, InteractionDistance, CraftingLayer))
-        {
-            CraftingManager = CurrentOpenCraftingTableRayCastHit.transform.GetComponent<CraftingManager>();
-
-            if (CraftingManager != null)
+            else
             {
-                CraftingManager.AcessCraftingTable();
-                StartCoroutine(CheckDistanceToInteracted(CraftingManager.transform, null, CraftingManager));
+                CraftingManager = CurrentOpenInteractableRayCastHit.transform.GetComponent<CraftingManager>();
 
+                if (CraftingManager != null)
+                {
+                    CraftingManager.AcessCraftingTable();
+                    StartCoroutine(CheckDistanceToInteracted(CraftingManager.transform, null, CraftingManager));
+
+                    return;
+                }
                 return;
             }
-            return;
         }
     }
 

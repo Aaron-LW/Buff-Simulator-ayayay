@@ -100,14 +100,12 @@ public class CraftingManager : MonoBehaviour
     {
         if (InventarManager.CraftingTableOpen)
         {
-            InventarManager.MainInventarObject.SetActive(false);
-            InventarUI.InventarOpen = false;
-
             InventarManager.MainInventarObject.transform.position = InventarManager.MainInventarBasePos.transform.position;
-            InventarManager.InventarUI.CameraMovement.UnlockCursor();
+            
             CraftingPanel.SetActive(false);
-
             InventarManager.CraftingTableOpen = false;
+
+            return;
         }
         else
         {
@@ -121,6 +119,8 @@ public class CraftingManager : MonoBehaviour
             InventarManager.MainInventarObject.transform.position = InventarManager.MainInventarChestPos.transform.position;
 
             CraftingUIManager.UpdateCraftingUI(Recipes);
+            InventarUI.UpdateInventory(InventarManager.Inventare[1]);
+            return;
         }
     }
 }

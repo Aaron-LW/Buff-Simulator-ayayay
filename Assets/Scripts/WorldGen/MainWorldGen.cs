@@ -218,8 +218,6 @@ public class MainWorldGen : MonoBehaviour
             int ID = Mathf.RoundToInt(Random.Range(1, 4));
             int Amount = Mathf.RoundToInt(Random.Range(1, 30));
 
-            Debug.Log(ID);
-
             ChestScript.AddItemQueue.Add(new ItemStack(ID, Amount));
         }
     }

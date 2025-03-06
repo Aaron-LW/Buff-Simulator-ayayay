@@ -23,7 +23,7 @@ public class InventarUI : MonoBehaviour
                 CameraMovement.UnlockCursor();
                 InventarOpen = false;
             }
-            if (InventarManager.MainInventarObject.gameObject.activeSelf == false && !InventarManager.ChestOpen)
+            if (InventarManager.MainInventarObject.gameObject.activeSelf == false && !InventarManager.ChestOpen && !InventarManager.CraftingTableOpen)
             {
                 CameraMovement.LockCursor();
                 InventarOpen = true;

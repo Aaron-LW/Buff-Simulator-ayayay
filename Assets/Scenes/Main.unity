@@ -345,7 +345,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -531,7 +531,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 1.01
+    m_NearPlane: 10
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -550,7 +550,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -881,13 +881,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIManager: {fileID: 1289239077}
   InventarUI: {fileID: 0}
-  InteractionDistance: 5
+  InteractionDistance: 6
   ChestMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   CraftingLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   MainInventarBasePos: {fileID: 2076967022}
   MainInventarChestPos: {fileID: 1669720110}
   MainInventarObject: {fileID: 1830767159}
@@ -903,6 +903,9 @@ MonoBehaviour:
   PlayerObjekt: {fileID: 953530758}
   CameraObject: {fileID: 330585543}
   BuffManager: {fileID: 857536645}
+  Interactables:
+    serializedVersion: 2
+    m_Bits: 256
   DraggingObject: 0
   DraggedObjectID: 999
   DraggedObjectSlotIndex: 999
@@ -1741,7 +1744,7 @@ MonoBehaviour:
   InventarManager: {fileID: 617161633}
   InventarUI: {fileID: 1289239078}
   CraftingUIManager: {fileID: 133103264}
-  CraftingPanel: {fileID: 486360548}
+  CraftingPanel: {fileID: 693766131}
 --- !u!4 &1557742225
 Transform:
   m_ObjectHideFlags: 0

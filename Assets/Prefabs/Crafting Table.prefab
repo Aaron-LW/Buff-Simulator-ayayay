@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 302817688582335623}
   - component: {fileID: 7454117321409478439}
   - component: {fileID: 5333235437314652940}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,9 +138,10 @@ GameObject:
   - component: {fileID: 954428147424407464}
   - component: {fileID: 4146978032401731283}
   - component: {fileID: 8905989106127289811}
-  m_Layer: 6
+  - component: {fileID: -6165651786460876748}
+  m_Layer: 8
   m_Name: Crafting Table
-  m_TagString: Untagged
+  m_TagString: CraftingTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,3 +252,21 @@ MonoBehaviour:
   InventarUI: {fileID: 0}
   CraftingUIManager: {fileID: 0}
   CraftingPanel: {fileID: 0}
+--- !u!114 &-6165651786460876748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488299116323307034}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

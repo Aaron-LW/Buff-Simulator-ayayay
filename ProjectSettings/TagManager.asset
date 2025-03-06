@@ -8,16 +8,18 @@ TagManager:
   - InventarSlots
   - CraftingSlot
   - CraftingAmountText
+  - CraftingTable
+  - Chest
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ChestLayer
+  - 
   - Water
   - UI
-  - CraftingLayer
-  - AlwaysVisible
   - 
+  - AlwaysVisible
+  - Interactables
   - 
   - 
   - 
